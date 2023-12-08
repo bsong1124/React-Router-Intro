@@ -1,5 +1,38 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 const StarshipsList = (props) => {
-    return <h1>This is the Starships List Component</h1>;
+  const [ships, setShips] = useState([]);
+
+  const fetchShips = async () => {
+    try {
+      const response = await fetch("https://swapi.dev/api/starships/");
+      const shipData = await response.json();
+      setShips(shipData.results);
+    } catch (err) {
+      console.log(err);
+    }
   };
-  
-  export default StarshipsList;
+
+  useEffect(() => {
+    fetchShips();
+  }, []);
+
+  return (
+    <div className="starships-list">
+      {ships.map((ship) => {
+        let { name, url } = ship;
+        let path = url.split("/");
+        const id = path[path.length - 2];
+
+        return (
+          <Link to={`/ships/${id}`}>
+            <h2>{name}</h2>
+          </Link>
+        );
+      })}
+    </div>
+  );
+};
+
+export default StarshipsList
