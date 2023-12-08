@@ -36,7 +36,35 @@ const Starship = (props) => {
   // loaded function for when data is fetched
   const loaded = () => {
     console.log(starship);
-    return <div>{/* update JSX */}</div>;
+    return (
+    <div>
+        <h2>
+            {starship.name} - {}
+        </h2>
+        <div>
+            <h3>Features</h3>
+            <ul>
+                <li>Starship Class: {starship.starship_class}</li>
+                <li>Capacity: {starship.cargo_capacity}</li>
+                <li>Crew (size): {starship.crew}</li>
+                <li>Passengers: {starship.passengers}</li>
+                <li>Manufacturer: {starship.manufacturer}</li>
+                <li>HD Rating: {starship.hyperdrive_rating} </li>
+                <li>Manufacturer: {starship.manufacturer}</li>
+                {/* Pilot info here */}
+             </ul>
+        </div>
+        <div>
+            <h3>Star Wars Stats</h3>
+            <ul>
+                <li>
+                  Appears in {starship.films?.length} film
+                  {starship.films?.length > 1 ? "s" : ""}
+                </li>
+            </ul>
+        </div>
+    </div>
+    )
   };
 
   // Function for when data doesn't exist
